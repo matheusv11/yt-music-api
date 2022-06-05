@@ -36,15 +36,35 @@ module.exports = (app) => {
         .catch(err => next(err))
 
         // VALIDAR SE SEMPRE EXISTE O AUDIO
-        const musicLink = response.streamingData.adaptiveFormats
-        .find(e=> {
-            console.log("Elementos", e)
-            return e.mimeType.includes("audio/webm")
-        })
+        const encodedLink = response.streamingData.adaptiveFormats
+        .find(e=>e.itag === 251)
         .signatureCipher
-        .split('&url=')[1]
 
-        return res.status(200).json({ url: musicLink })
+        // ENCODED
+        const encodedSignature = encodedLink.split("&")[0].replace("s=", "")
+        const encodedUrl = encodedLink.split("&")[2].replace("url=", "")
+
+        // SIGNATURE DECODE
+        const reverseSignature = decodeURIComponent(encodedSignature)
+                                 .split("").reverse().join("")
+
+        const hydrateSignature = reverseSignature.slice(0, reverseSignature.length - 3) // USAR FILTER
+
+        const splitHydrateSignature = hydrateSignature.split("")
+
+        const signatureEncoded = [...splitHydrateSignature]
+        signatureEncoded[48] = splitHydrateSignature[0]
+        signatureEncoded[0] = splitHydrateSignature[48]
+
+        //DECODED
+        const decodedUrl = decodeURIComponent(encodedUrl)
+        const decodedSignature = signatureEncoded.join("")
+
+        const musicLink = `${decodedUrl}?sig=${decodedSignature}`
+
+        return res.status(200).json({ 
+            url: musicLink
+        })
 
     })
 
