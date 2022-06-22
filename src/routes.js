@@ -2,6 +2,7 @@
 const ytController = require('./controllers/ytController');
 const usuarioController = require('./controllers/usuarioController');
 const playListController = require('./controllers/playListController');
+const musicaPlayListController = require('./controllers/musicaPlayListController');
 const authController = require('./controllers/authController');
 
 // MIDDLEWARES
@@ -18,6 +19,11 @@ module.exports = (app) => {
     app.post('/usuario', usuarioController.create)
 
     app.post('/playlist', jwt.userAccess, playListController.create)
+
+    app.get('/playlist/:playlistId', jwt.userAccess, playListController.getPlaylist)
+    app.get('/all-playlists', jwt.userAccess, playListController.allPlaylists)
+
+    app.post('/musica-playlist', jwt.userAccess, musicaPlayListController.create);
 
     app.post('/auth', authController.auth)
 
