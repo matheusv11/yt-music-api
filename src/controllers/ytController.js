@@ -1,4 +1,4 @@
-const { topSongParams, playerParams } = require('../config/yt-music');
+const { topSongParams, playerParams, searchParams } = require('../config/yt-music');
 const axios = require('axios');
 
 module.exports = {
@@ -59,5 +59,32 @@ module.exports = {
             url: musicLink
         })
 
+    },
+
+    async searchMusic(req, res, next) {
+        const { musica } = req.query;
+        const response = await axios.post("https://music.youtube.com/youtubei/v1/search", { query: musica, ...searchParams })
+        .then(result => result.data)
+        .catch(err => next(err))
+
+        const filterMusic = ['Songs', 'Videos'];
+
+        const musicList = response.contents.tabbedSearchResultsRenderer.tabs[0]
+        .tabRenderer.content.sectionListRenderer.contents
+        .filter(m => filterMusic.includes(m.musicShelfRenderer.title.runs[0].text) )
+        .reduce((initial, list) => {
+            const musicData =  list.musicShelfRenderer.contents.map(({ musicResponsiveListItemRenderer: msc }) => {
+                return {
+                    name: msc.flexColumns[0].musicResponsiveListItemFlexColumnRenderer.text.runs[0].text,
+                    musicId: msc.playlistItemData.videoId,
+                    thumbnail: msc.thumbnail.musicThumbnailRenderer.thumbnail.thumbnails[0].url
+                }
+            })
+
+            initial.push(...musicData)
+            return initial;
+        }, []);
+
+        return res.status(200).send(musicList)
     }
 }

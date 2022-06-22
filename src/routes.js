@@ -16,6 +16,8 @@ module.exports = (app) => {
 
     app.get('/musica/:musicId', ytController.getMusic)
 
+    app.get('/search-music', ytController.searchMusic);
+
     app.post('/usuario', usuarioController.create)
 
     app.post('/playlist', jwt.userAccess, playListController.create)
