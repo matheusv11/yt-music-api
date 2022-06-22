@@ -1,71 +1,18 @@
-// const 
-const axios = require('axios');
-
-const { topSongParams, playerParams } = require('./config/yt-music');
+// CONTROLLERS
+const ytController = require('./controllers/ytController');
+const usuarioController = require('./controllers/usuarioController');
+const playListController = require('./controllers/playListController');
 
 module.exports = (app) => {
 
-    app.get('/', (req,res) => {
-        res.send("PONG!!!")
-    })
+    app.get('/', (req, res) => res.send("PONG!!!"))
 
-    app.get('/top-musics', async (req, res, next) => {
-        const response = await axios.post('https://music.youtube.com/youtubei/v1/browse', topSongParams)
-        .then(result => result.data)
-        .catch(err => next(err))
+    app.get('/top-musicas', ytController.topMusics)
 
-        const topSongs = response.contents.singleColumnBrowseResultsRenderer.tabs[0]
-                    .tabRenderer.content.sectionListRenderer.contents[0]
-                    .musicCarouselShelfRenderer.contents
-                    .map(({ musicResponsiveListItemRenderer: msc }) => {
-                        return {
-                            name: msc.flexColumns[0].musicResponsiveListItemFlexColumnRenderer.text.runs[0].text,
-                            musicId: msc.playlistItemData.videoId,
-                            thumbnail: msc.thumbnail.musicThumbnailRenderer.thumbnail.thumbnails[0].url
-                        }
-                    })
+    app.get('/musica/:musicId', ytController.getMusic)
 
-        return res.status(200).json(topSongs)
-    })
+    app.post('/usuario', usuarioController.create)
 
-    app.get('/music/:musicId', async (req, res, next) => {
-        const { musicId } = req.params // VALIDAR SE O PARAMS NÃO VAI QUEBRAR COM ALGUM ID
-
-        const response = await axios.post("https://music.youtube.com/youtubei/v1/player", {videoId: musicId, ...playerParams })
-        .then(result => result.data)
-        .catch(err => next(err))
-
-        // VALIDAR SE SEMPRE EXISTE O AUDIO
-        const encodedLink = response.streamingData.adaptiveFormats
-        .find(e=>e.itag === 251)
-        .signatureCipher
-
-        // ENCODED
-        const encodedSignature = encodedLink.split("&")[0].replace("s=", "")
-        const encodedUrl = encodedLink.split("&")[2].replace("url=", "")
-
-        // SIGNATURE DECODE
-        const reverseSignature = decodeURIComponent(encodedSignature)
-                                 .split("").reverse().join("")
-
-        const hydrateSignature = reverseSignature.slice(0, reverseSignature.length - 3) // USAR FILTER
-
-        const splitHydrateSignature = hydrateSignature.split("")
-
-        const signatureEncoded = [...splitHydrateSignature]
-        signatureEncoded[48] = splitHydrateSignature[0]
-        signatureEncoded[0] = splitHydrateSignature[48]
-
-        //DECODED
-        const decodedUrl = decodeURIComponent(encodedUrl)
-        const decodedSignature = signatureEncoded.join("")
-
-        const musicLink = `${decodedUrl}?sig=${decodedSignature}`
-
-        return res.status(200).json({ 
-            url: musicLink
-        })
-
-    })
+    app.post('/playlist', playListController.create)
 
 }
