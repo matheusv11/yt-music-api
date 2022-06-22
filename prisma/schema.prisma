@@ -14,7 +14,7 @@ model usuario {
   id Int @id @default(autoincrement())
   nome String @db.VarChar(100)
   email String @db.VarChar(60)
-  senha String @db.VarChar(40)
+  senha String @db.VarChar(200)
   playlist playlist[]
 }
 
