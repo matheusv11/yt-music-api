@@ -259,5 +259,127 @@ module.exports = {
         "serviceIntegrityDimensions": {
           "poToken": "GpsBCm4CW5jnOuTot8h_XTjgO7KXydHuiXATQobtSXJ1cbyoqfn1ZTgGV4XHm5WPTL-66BBRR4tZQ0ty9Skq06Bo-LS7dlSfsEPug3-KNlqbFUDwQFQniyy7qn9KFXue6gdxOBlixZ3cC-erj-1RNuzz0xIpATwYQQ7PsjXm7A-N3wk8Yv0N6yZkZDSQpzvXDCtKlevzJQrTc0QYTNo="
         }
-      }
+    },
+    searchParams: {
+      "context": {
+        "client": {
+          "hl": "en",
+          "gl": "BR",
+          "remoteHost": "45.226.62.173",
+          "deviceMake": "",
+          "deviceModel": "",
+          "visitorData": "CgtUR3ozS1JacC1Payj7wMyVBg%3D%3D",
+          "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/102.0.5005.115 Safari/537.36,gzip(gfe)",
+          "clientName": "WEB_REMIX",
+          "clientVersion": "1.20220613.01.00",
+          "osName": "Windows",
+          "osVersion": "10.0",
+          "originalUrl": "https://music.youtube.com/",
+          "platform": "DESKTOP",
+          "clientFormFactor": "UNKNOWN_FORM_FACTOR",
+          "configInfo": {
+            "appInstallData": "CPvAzJUGEJiHrgUQ1IOuBRC3y60FEP24_RIQmN79EhCCjq4FEPqorgUQuIuuBRCUj64FENi-rQU%3D"
+          },
+          "browserName": "Chrome",
+          "browserVersion": "102.0.5005.115",
+          "screenWidthPoints": 1920,
+          "screenHeightPoints": 442,
+          "screenPixelDensity": 1,
+          "screenDensityFloat": 1,
+          "utcOffsetMinutes": -180,
+          "userInterfaceTheme": "USER_INTERFACE_THEME_DARK",
+          "timeZone": "America/Sao_Paulo",
+          "musicAppInfo": {
+            "pwaInstallabilityStatus": "PWA_INSTALLABILITY_STATUS_UNKNOWN",
+            "webDisplayMode": "WEB_DISPLAY_MODE_BROWSER",
+            "storeDigitalGoodsApiSupportStatus": {
+              "playStoreDigitalGoodsApiSupportStatus": "DIGITAL_GOODS_API_SUPPORT_STATUS_UNSUPPORTED"
+            },
+            "musicActivityMasterSwitch": "MUSIC_ACTIVITY_MASTER_SWITCH_INDETERMINATE",
+            "musicLocationMasterSwitch": "MUSIC_LOCATION_MASTER_SWITCH_INDETERMINATE"
+          }
+        },
+        "user": {
+          "lockedSafetyMode": false
+        },
+        "request": {
+          "useSsl": true,
+          "internalExperimentFlags": [],
+          "consistencyTokenJars": []
+        },
+        "adSignalsInfo": {
+          "params": [
+            {
+              "key": "dt",
+              "value": "1655906428283"
+            },
+            {
+              "key": "flash",
+              "value": "0"
+            },
+            {
+              "key": "frm",
+              "value": "0"
+            },
+            {
+              "key": "u_tz",
+              "value": "-180"
+            },
+            {
+              "key": "u_his",
+              "value": "3"
+            },
+            {
+              "key": "u_h",
+              "value": "1080"
+            },
+            {
+              "key": "u_w",
+              "value": "1920"
+            },
+            {
+              "key": "u_ah",
+              "value": "1040"
+            },
+            {
+              "key": "u_aw",
+              "value": "1920"
+            },
+            {
+              "key": "u_cd",
+              "value": "24"
+            },
+            {
+              "key": "bc",
+              "value": "31"
+            },
+            {
+              "key": "bih",
+              "value": "442"
+            },
+            {
+              "key": "biw",
+              "value": "1908"
+            },
+            {
+              "key": "brdim",
+              "value": "0,0,0,0,1920,0,1920,1040,1920,442"
+            },
+            {
+              "key": "vis",
+              "value": "1"
+            },
+            {
+              "key": "wgl",
+              "value": "true"
+            },
+            {
+              "key": "ca_type",
+              "value": "image"
+            }
+          ]
+        }
+      },
+      "params": "EgWKAQIQAWoKEAMQBBAJEAoQBQ%3D%3D"
+    }
 }
