@@ -2,6 +2,10 @@
 const ytController = require('./controllers/ytController');
 const usuarioController = require('./controllers/usuarioController');
 const playListController = require('./controllers/playListController');
+const authController = require('./controllers/authController');
+
+// MIDDLEWARES
+const jwt = require('./middlewares/jwt');
 
 module.exports = (app) => {
 
@@ -13,6 +17,8 @@ module.exports = (app) => {
 
     app.post('/usuario', usuarioController.create)
 
-    app.post('/playlist', playListController.create)
+    app.post('/playlist', jwt.userAccess, playListController.create)
+
+    app.post('/auth', authController.auth)
 
 }

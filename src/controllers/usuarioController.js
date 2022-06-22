@@ -1,6 +1,6 @@
-const { PrismaClient } = require('@prisma/client')
-
-const prisma = new PrismaClient()
+const { PrismaClient } = require('@prisma/client');
+const { hashSync: hash} = require('bcrypt');
+const prisma = new PrismaClient();
 
 module.exports = {
     async get(req, res) {},
@@ -15,13 +15,15 @@ module.exports = {
 
         if(usuario) return res.status(401).send({ error: 'Usúario já cadastrado' });
         
+        const hashPassword = hash(senha, 10);
+
         await prisma.usuario.create({
             data: {
                 nome,
                 email,
-                senha
+                senha: hashPassword
             }
-        }).catch(err => next(err))
+        }).catch(err => next(err));
 
         return res.status(201).send({ message: 'Cadastro concluido com sucesso'});
     },
