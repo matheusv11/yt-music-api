@@ -16,7 +16,7 @@ module.exports = {
         });
 
         if(!result || !compareHash(senha, result.senha) ){
-            return res.status(401).send({ message: 'Email ou senha incorretos' });
+            return res.status(401).send({ error: 'Email ou senha incorretos' });
         }
 
         const acessToken= token({ id: result.id }, process.env.JWT_SECRET || 'secret@123', {
