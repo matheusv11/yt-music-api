@@ -29,9 +29,14 @@ module.exports = {
         .catch(err => next(err))
 
         // VALIDAR SE SEMPRE EXISTE O AUDIO
-        const encodedLink = response.streamingData.adaptiveFormats
+        const {signatureCipher: encodedLink, url: urlVideo} = response.streamingData.adaptiveFormats
         .find(e=>e.itag === 251)
-        .signatureCipher
+
+        if(urlVideo) {
+            return res.status(200).json({ 
+                url: urlVideo
+            })
+        }
 
         // ENCODED
         const encodedSignature = encodedLink.split("&")[0].replace("s=", "")
