@@ -19,14 +19,16 @@ module.exports = (app) => {
     app.get('/search-music', ytController.searchMusic);
 
     app.post('/usuario', usuarioController.create)
-
-    app.post('/playlist', jwt.userAccess, playListController.create)
-
+    
     app.get('/playlist/:playlistId', jwt.userAccess, playListController.getPlaylist)
     app.get('/all-playlists', jwt.userAccess, playListController.allPlaylists)
+    
+    app.post('/playlist', jwt.userAccess, playListController.create)
 
     app.post('/musica-playlist', jwt.userAccess, musicaPlayListController.create);
 
     app.post('/auth', authController.auth)
+
+    app.get('/validate-token', jwt.userAccess, authController.token)
 
 }

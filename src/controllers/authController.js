@@ -30,10 +30,6 @@ module.exports = {
     },
 
     async token(req, res) {
-        const token = req.headers.authorization
-        
-        if(!token) return res.status(401).send({ message: 'Token não informado' });
-
-        
+        return res.status(200).send({ message: " Token válido "})        
     }
 }
