@@ -12,6 +12,8 @@ module.exports = (app) => {
 
     app.get('/', (req, res) => res.send("PONG!!!"))
 
+    app.get('/user-info', jwt.userAccess, usuarioController.userInfo)
+
     app.get('/top-musicas', ytController.topMusics)
 
     app.get('/musica/:musicId', ytController.getMusic)

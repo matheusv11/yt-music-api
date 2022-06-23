@@ -5,6 +5,17 @@ const prisma = new PrismaClient();
 module.exports = {
     async get(req, res) {},
     
+    async userInfo(req, res) {
+        const { userId } = res.locals;
+        
+        const usuario = await prisma.usuario.findUnique({
+            where: {
+                id: parseInt(userId)
+            }
+        });
+
+        return res.status(200).send(usuario);
+    },
     async create(req, res, next) {
         const { nome, email, senha } = req.body; // USAR UM JOI PRA IMPEDIR QUEBRAR
         const usuario = await prisma.usuario.findFirst({
