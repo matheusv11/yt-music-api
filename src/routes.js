@@ -26,6 +26,7 @@ module.exports = (app) => {
     app.get('/all-playlists', jwt.userAccess, playListController.allPlaylists)
     
     app.post('/playlist', jwt.userAccess, playListController.create)
+    app.delete('/playlist/:playlistId', jwt.userAccess, playListController.delete)
 
     app.post('/musica-playlist', jwt.userAccess, musicaPlayListController.create);
 
