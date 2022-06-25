@@ -60,7 +60,9 @@ module.exports = {
 
         const musicLink = `${decodedUrl}?sig=${decodedSignature}`
 
-        return res.status(200).json({ 
+        return res.status(200).json({
+            nome: response.videoDetails.title,
+            thumbnail: response.videoDetails.thumbnail.thumbnails[0].url,
             url: musicLink
         })
 
