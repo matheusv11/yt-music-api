@@ -15,6 +15,7 @@ model usuario {
   nome String @db.VarChar(100)
   email String @db.VarChar(60)
   senha String @db.VarChar(200)
+  imagem Bytes @db.ByteA
   playlist playlist[]
 }
 
