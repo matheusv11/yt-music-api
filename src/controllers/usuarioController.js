@@ -32,7 +32,8 @@ module.exports = {
             data: {
                 nome,
                 email,
-                senha: hashPassword
+                senha: hashPassword,
+                imagem: req.file.buffer
             }
         }).catch(err => next(err));
 
