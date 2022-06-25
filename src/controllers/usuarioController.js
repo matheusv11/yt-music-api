@@ -14,6 +14,8 @@ module.exports = {
             }
         });
 
+        usuario.imagem = `data:image/jpeg;base64,${new Buffer.from(usuario.imagem).toString("base64")}` // SOBRESCRITA DE OBJETO, É BOM?
+
         return res.status(200).send(usuario);
     },
     async create(req, res, next) {
