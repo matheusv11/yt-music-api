@@ -26,7 +26,9 @@ module.exports = {
 
         const response = await axios.post("https://music.youtube.com/youtubei/v1/player", {videoId: musicId, ...playerParams })
         .then(result => {
-            console.log("Resultado", result)
+            console.log("Header", result.headers)
+            console.log("Config", result.config)
+            
             return result.data
         })
         .catch(err => next(err))
