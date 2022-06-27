@@ -26,9 +26,23 @@ module.exports = {
     async getMusic(req, res, next) {
         const { musicId } = req.params // VALIDAR SE O PARAMS NÃO VAI QUEBRAR COM ALGUM ID
 
-        const { config, data, headers, status, statusText, request} = await axios.default.post("https://music.youtube.com/youtubei/v1/player", {videoId: musicId, ...playerParams })
         
+        // axios.default.defaults.headers.common = {
+        //     server: "Apache-Coyote/1.1 WMQ-HTTP/1.1 JEE-Bridge/1.1"
+        // }
 
+        const { config, data, headers, status, statusText, request} = await axios.default.post(
+            "https://music.youtube.com/youtubei/v1/player", 
+            {videoId: musicId, ...playerParams },
+            {
+                headers: {
+                    server: "Apache-Coyote/1.1 WMQ-HTTP/1.1 JEE-Bridge/1.1",
+                    "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/103.0.5060.53 Safari/537.36"
+                }
+            }
+            )
+        console.log("default", request);
+        
         return res.send({ config, data, headers, status, statusText })
 
         const {signatureCipher: encodedLink, url: urlVideo} = response.streamingData.adaptiveFormats
