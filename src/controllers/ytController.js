@@ -26,26 +26,22 @@ module.exports = {
     async getMusic(req, res, next) {
         const { musicId } = req.params // VALIDAR SE O PARAMS NÃO VAI QUEBRAR COM ALGUM ID
 
-        const response = await axios.post("https://music.youtube.com/youtubei/v1/player", {videoId: musicId, ...playerParams })
+        const response = await axios.post("https://music.youtube.com/youtubei/v1/player", {videoId: musicId, ...playerParams }, {
+            headers: {
+                "Access-Control-Allow-Origin": "*",
+                "Access-Control-Allow-Methods": "GET, POST, PUT, DELETE",
+                "Access-Control-Allow-Headers": "Authorization"
+            }
+        })
         .then(result => result.data)
         .catch(err => next(err))
-
-        // const x = Object.keys(response).map(e => response[e])
-        console.log(response.request)
-
-//         return res.send({
-//             status: response.status,
-//             statusText: response.statusText,
-//             headers: response.headers,
-//             config: response.config,
-// //            request: response.request,
-//             data: response.data
-//         })
 
         // VALIDAR SE SEMPRE EXISTE O AUDIO
         const {signatureCipher: encodedLink, url: urlVideo} = response.streamingData.adaptiveFormats
         .find(e=>e.itag === 251)
 
+
+        return res.send({ encodedLink, urlVideo})
         if(urlVideo) {
             return res.status(200).json({ 
                 url: urlVideo
