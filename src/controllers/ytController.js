@@ -28,7 +28,7 @@ module.exports = {
 
         const response = await axios.default.post("https://music.youtube.com/youtubei/v1/player", {videoId: musicId, ...playerParams }, {
             headers: {
-                "user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/103.0.5060.53 Safari/537.36",
+                "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/102.0.5005.61 Safari/537.36,gzip(gfe)",
             },
             env: undefined
         })
