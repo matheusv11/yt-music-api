@@ -31,27 +31,13 @@ module.exports = {
             {videoId: musicId, ...playerParams },
             {
                 headers: {
-                    // ":authority": "music.youtube.com",
-                    // ":method": "POST",
-                    // ":path": "/youtubei/v1/player?key=AIzaSyC9XL3ZjWddXya6X74dJoCTL-WEYFDNX30&prettyPrint=false",
-                    // ":scheme": "https",
-                    "accept": "*/*",
-                    "accept-language": "en-US,en;q=0.9",
-                    "content-type": "application/json",
-                    "cookie": "YSC=3M-DzFuWG_8; VISITOR_INFO1_LIVE=30YR7aMf0LI",
-                    "origin": "https://music.youtube.com",
-                    "referer": "https://music.youtube.com/search?q=yofukashi+no+uta",
                     "sec-fetch-dest": "empty",
                     "Sec-Fetch-Mode": "navigate ",
                     "Sec-Fetch-Site": "cross-site",
                     "Upgrade-Insecure-Requests": "1",
-                    "Connection": "keep-alive",
                     "Sec-Fetch-User": "?1",
                     "Sec-GPC": "1",
                     "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/103.0.5060.53 Safari/537.36",
-                    "x-goog-visitor-id": "CgszMFlSN2FNZjBMSSjK5OiVBg%3D%3D",
-                    "x-youtube-client-name": "67",
-                    "x-youtube-client-version": "1.20220622.01.00"
                 }
             }
             ).then(res => res.data)
@@ -59,7 +45,7 @@ module.exports = {
         // return res.send({ config, data, headers, status, statusText })
 
         const {signatureCipher: encodedLink, url: urlVideo} = response.streamingData.adaptiveFormats
-        .find(e=>e.itag === 251)
+        .find(e=>e.itag === 134)
 
 
         if(urlVideo) {
