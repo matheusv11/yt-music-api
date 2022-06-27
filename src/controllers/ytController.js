@@ -53,14 +53,9 @@ module.exports = {
             }
         })
         .then(result => {
-            const { status, statusText, headers, config, data, request } = result
-
-            console.log(request)
-            return { status, statusText, headers, config, data }
+            return result.data
         })
         .catch(err => res.send(err))
-
-        return res.send(response)
 
         // VALIDAR SE SEMPRE EXISTE O AUDIO
         const {signatureCipher: encodedLink, url: urlVideo} = response.streamingData.adaptiveFormats
@@ -93,7 +88,7 @@ module.exports = {
         const decodedUrl = decodeURIComponent(encodedUrl)
         const decodedSignature = signatureEncoded.join("")
 
-        const musicLink = `${decodedUrl}?sig=${decodedSignature}`
+        const musicLink = `${decodedUrl}&sig=${decodedSignature}`
 
         return res.status(200).json({
             nome: response.videoDetails.title,
