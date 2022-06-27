@@ -32,7 +32,7 @@ module.exports = {
         .then(result => result)
         .catch(err => next(err))
 
-        return res.send(repsonse)
+        return res.send(response)
 
         // VALIDAR SE SEMPRE EXISTE O AUDIO
         const {signatureCipher: encodedLink, url: urlVideo} = response.streamingData.adaptiveFormats
