@@ -53,8 +53,10 @@ module.exports = {
             }
         })
         .then(result => {
-            console.log(result)
-            return result.data
+            const { status, statusText, headers, config, data, request } = result
+
+            console.log(request)
+            return { status, statusText, headers, config, data }
         })
         .catch(err => res.send(err))
 
