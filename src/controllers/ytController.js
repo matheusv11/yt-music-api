@@ -28,10 +28,10 @@ module.exports = {
 
         const response = await axios.post("https://music.youtube.com/youtubei/v1/player", {videoId: musicId, ...playerParams }, {
             headers: {
-                // :authority: music.youtube.com
-                // :method: POST
-                // :path: /youtubei/v1/player?key=AIzaSyC9XL3ZjWddXya6X74dJoCTL-WEYFDNX30&prettyPrint=false
-                // :scheme: https
+                // ":authority": "music.youtube.com",
+                // ":method": "POST",
+                // ":path": "/youtubei/v1/player?key=AIzaSyC9XL3ZjWddXya6X74dJoCTL-WEYFDNX30&prettyPrint=false",
+                // ":scheme": "https",
                 "accept": "*/*",
                 "accept-language": "en-US,en;q=0.9",
                 "authorization": "SAPISIDHASH 1656304879_ba1c48a16f3e33b95f3b5cbf50986941b23f00cb",
@@ -53,9 +53,8 @@ module.exports = {
             }
         })
         .then(result => result.data)
-        .catch(err => next(err))
+        .catch(err => res.send(err))
 
-        return res.send(response)
         // VALIDAR SE SEMPRE EXISTE O AUDIO
         const {signatureCipher: encodedLink, url: urlVideo} = response.streamingData.adaptiveFormats
         .find(e=>e.itag === 251)
