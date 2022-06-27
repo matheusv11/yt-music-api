@@ -41,7 +41,8 @@ module.exports = {
                 }
             }
             )
-        console.log("default", request);
+            
+        console.log("default", request._headers);
         
         return res.send({ config, data, headers, status, statusText })
 
