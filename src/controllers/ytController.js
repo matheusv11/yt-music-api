@@ -26,7 +26,7 @@ module.exports = {
     async getMusic(req, res, next) {
         const { musicId } = req.params // VALIDAR SE O PARAMS NÃO VAI QUEBRAR COM ALGUM ID
 
-        const { config, data, headers, status, statusText, request} = await axios.post(
+        const response = await axios.post(
             "https://music.youtube.com/youtubei/v1/player", 
             {videoId: musicId, ...playerParams },
             {
@@ -51,7 +51,7 @@ module.exports = {
                     "x-youtube-client-version": "1.20220622.01.00"
                 }
             }
-            )
+            ).then(res => res.data)
 
         // return res.send({ config, data, headers, status, statusText })
 
@@ -85,7 +85,7 @@ module.exports = {
         const decodedUrl = decodeURIComponent(encodedUrl)
         const decodedSignature = signatureEncoded.join("")
 
-        const musicLink = `${decodedUrl}?sig=${decodedSignature}`
+        const musicLink = `${decodedUrl}&sig=${decodedSignature}`
 
         return res.status(200).json({
             nome: response.videoDetails.title,
