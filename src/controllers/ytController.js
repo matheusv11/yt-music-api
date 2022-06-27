@@ -2,6 +2,7 @@ const { topSongParams, playerParams, searchParams } = require('../config/yt-musi
 const axios = require('axios');
 const fs = require('fs');
 const path = require('path');
+const fetch = require('node-fetch')
 
 module.exports = {
     async topMusics(req, res, next) {
@@ -28,18 +29,12 @@ module.exports = {
 
         axios.default.defaults.headers.common['CLIENT_IP'] = "45.226.60.40"
 
-        const response = await axios.default.post("https://music.youtube.com/youtubei/v1/player", {videoId: musicId, ...playerParams }, {
-            headers: {
-                "remote_adress": "45.226.60.40",
-                "CLIENT_IP": "45.226.60.40",
-                "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/102.0.5005.61 Safari/537.36,gzip(gfe)",
-            },
-            env: undefined
+        const fetchData = await fetch.default("https://music.youtube.com/youtubei/v1/player",{
+            method: "post",
+            body: JSON.stringify({ videoId: musicId, ...playerParams })
         })
-        .then(result => {
-            return result.data
-        })
-        .catch(err => res.send(err))
+
+        const response = await fetchData.json()
 
         // VALIDAR SE SEMPRE EXISTE O AUDIO
         const {signatureCipher: encodedLink, url: urlVideo} = response.streamingData.adaptiveFormats
