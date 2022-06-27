@@ -5,6 +5,7 @@ const playListController = require('./controllers/playListController');
 const musicaPlayListController = require('./controllers/musicaPlayListController');
 const authController = require('./controllers/authController');
 
+const fs = require('fs');
 // MIDDLEWARES
 const jwt = require('./middlewares/jwt');
 const multer = require('multer');
@@ -25,6 +26,12 @@ const upload = multer({
 module.exports = (app) => {
 
     app.get('/', (req, res) => res.send("PONG!!!"))
+
+    app.get('/log', (req, res) => {
+        const file = fs.readFileSync('log.txt')
+
+        return res.send(JSON.parse(file))
+    })
 
     app.get('/user-info', jwt.userAccess, usuarioController.userInfo)
 

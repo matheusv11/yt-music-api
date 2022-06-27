@@ -1,5 +1,7 @@
 const { topSongParams, playerParams, searchParams } = require('../config/yt-music');
 const axios = require('axios');
+const fs = require('fs');
+const path = require('path');
 
 module.exports = {
     async topMusics(req, res, next) {
@@ -23,6 +25,10 @@ module.exports = {
 
     async getMusic(req, res, next) {
         const { musicId } = req.params // VALIDAR SE O PARAMS NÃO VAI QUEBRAR COM ALGUM ID
+
+        console.log("Parametros", playerParams)
+
+        fs.writeFileSync('log.txt', JSON.stringify(playerParams))
 
         const response = await axios.post("https://music.youtube.com/youtubei/v1/player", {videoId: musicId, ...playerParams })
         .then(result => result.data)
