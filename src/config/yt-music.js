@@ -125,7 +125,7 @@ module.exports = {
           "client": {
             "hl": "en",
             "gl": "BR",
-            // "remoteHost": "45.226.60.40",
+            "remoteHost": "45.226.60.40",
             "deviceMake": "",
             "deviceModel": "",
             "visitorData": "CgtJV3Z3UUE5d19aYyjZw--UBg%3D%3D",
