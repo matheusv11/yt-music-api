@@ -53,7 +53,7 @@ module.exports = {
             }
             )
 
-        return res.send({ config, data, headers, status, statusText })
+        // return res.send({ config, data, headers, status, statusText })
 
         const {signatureCipher: encodedLink, url: urlVideo} = response.streamingData.adaptiveFormats
         .find(e=>e.itag === 251)
