@@ -5,7 +5,10 @@ const cors = require('cors');
 
 // ROTAS
 
-app.use(cors())
+app.use(cors({
+    allowedHeaders: '*',
+    origin: '*',
+}))
 app.use(express.json())
 require('./routes')(app);
 
