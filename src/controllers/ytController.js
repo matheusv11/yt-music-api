@@ -32,11 +32,12 @@ module.exports = {
         const fetchData = await fetch("https://music.youtube.com/youtubei/v1/player?key=AIzaSyC9XL3ZjWddXya6X74dJoCTL-WEYFDNX30&prettyPrint=false", {
             "headers": {
               "accept": "*/*",
+              "origin": "https://music.youtube.com",
               "accept-language": "en-US,en;q=0.9",
               "content-type": "application/json",
               "sec-fetch-dest": "empty",
               "sec-fetch-mode": "cors",
-              "sec-fetch-site": "same-origin",
+              "sec-fetch-site": "same-site",
               "sec-gpc": "1",
               "x-goog-visitor-id": "CgszMFlSN2FNZjBMSSjK5OiVBg%3D%3D",
               "x-youtube-client-name": "67",
