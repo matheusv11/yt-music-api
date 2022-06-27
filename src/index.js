@@ -1,8 +1,11 @@
 const express = require('express');
 const app = express();
 const port = process.env.NODE_PORT || 3030;
+const cors = require('cors');
 
 // ROTAS
+
+app.use(cors())
 app.use(express.json())
 require('./routes')(app);
 
