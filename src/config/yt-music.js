@@ -153,15 +153,11 @@ module.exports = {
             },
             "clientScreen": "WATCH_FULL_SCREEN"
           },
-          "user": {
-            "lockedSafetyMode": false
-          },
           "request": {
             "useSsl": true,
             "internalExperimentFlags": [],
             "consistencyTokenJars": []
           },
-          "clientScreenNonce": "MC4wODQ5OTg0MTQ5NDk3NTQyNA..",
           "adSignalsInfo": {
             "params": []
           },
