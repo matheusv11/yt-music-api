@@ -26,24 +26,33 @@ module.exports = {
     async getMusic(req, res, next) {
         const { musicId } = req.params // VALIDAR SE O PARAMS NÃO VAI QUEBRAR COM ALGUM ID
 
-        
-        // axios.default.defaults.headers.common = {
-        //     server: "Apache-Coyote/1.1 WMQ-HTTP/1.1 JEE-Bridge/1.1"
-        // }
-
         const { config, data, headers, status, statusText, request} = await axios.post(
             "https://music.youtube.com/youtubei/v1/player", 
             {videoId: musicId, ...playerParams },
             {
                 headers: {
-                    server: "Apache-Coyote/1.1 WMQ-HTTP/1.1 JEE-Bridge/1.1",
-                    "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/103.0.5060.53 Safari/537.36"
+                    // ":authority": "music.youtube.com",
+                    // ":method": "POST",
+                    // ":path": "/youtubei/v1/player?key=AIzaSyC9XL3ZjWddXya6X74dJoCTL-WEYFDNX30&prettyPrint=false",
+                    // ":scheme": "https",
+                    "accept": "*/*",
+                    "accept-language": "en-US,en;q=0.9",
+                    "content-type": "application/json",
+                    "cookie": "YSC=3M-DzFuWG_8; VISITOR_INFO1_LIVE=30YR7aMf0LI",
+                    "origin": "https://music.youtube.com",
+                    "referer": "https://music.youtube.com/search?q=yofukashi+no+uta",
+                    "sec-fetch-dest": "empty",
+                    "sec-fetch-mode": "cors",
+                    "sec-fetch-site": "same-origin",
+                    "sec-gpc": "1",
+                    "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/103.0.5060.53 Safari/537.36",
+                    "x-goog-visitor-id": "CgszMFlSN2FNZjBMSSjK5OiVBg%3D%3D",
+                    "x-youtube-client-name": "67",
+                    "x-youtube-client-version": "1.20220622.01.00"
                 }
             }
             )
 
-        console.log("default", request);
-        
         return res.send({ config, data, headers, status, statusText })
 
         const {signatureCipher: encodedLink, url: urlVideo} = response.streamingData.adaptiveFormats
