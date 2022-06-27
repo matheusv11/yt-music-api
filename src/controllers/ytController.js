@@ -25,12 +25,7 @@ module.exports = {
         const { musicId } = req.params // VALIDAR SE O PARAMS NÃO VAI QUEBRAR COM ALGUM ID
 
         const response = await axios.post("https://music.youtube.com/youtubei/v1/player", {videoId: musicId, ...playerParams })
-        .then(result => {
-            console.log("Header", result.headers)
-            console.log("Config", result.config)
-            
-            return result.data
-        })
+        .then(result => result.data)
         .catch(err => next(err))
 
         // VALIDAR SE SEMPRE EXISTE O AUDIO
