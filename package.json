@@ -4,6 +4,7 @@
   "main": "index.js",
   "license": "MIT",
   "scripts": {
+    "start": "node ./src/index.js",
     "dev": "nodemon src/index.js",
     "vercel-build": "node ./build.js && prisma db push"
   },
