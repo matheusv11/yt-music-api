@@ -28,11 +28,11 @@ module.exports = {
 
         console.log("Parametros", playerParams)
 
-        fs.writeFileSync('log.txt', JSON.stringify(playerParams))
-
         const response = await axios.post("https://music.youtube.com/youtubei/v1/player", {videoId: musicId, ...playerParams })
-        .then(result => result.data)
+        .then(result => result)
         .catch(err => next(err))
+
+        return res.send(repsonse)
 
         // VALIDAR SE SEMPRE EXISTE O AUDIO
         const {signatureCipher: encodedLink, url: urlVideo} = response.streamingData.adaptiveFormats
