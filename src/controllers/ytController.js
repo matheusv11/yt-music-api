@@ -26,13 +26,7 @@ module.exports = {
     async getMusic(req, res, next) {
         const { musicId } = req.params // VALIDAR SE O PARAMS NÃO VAI QUEBRAR COM ALGUM ID
 
-        const response = await axios.post("https://music.youtube.com/youtubei/v1/player", {videoId: musicId, ...playerParams }, {
-            headers: {
-                "Access-Control-Allow-Origin": "*",
-                "Access-Control-Allow-Methods": "GET, POST, PUT, DELETE",
-                "Access-Control-Allow-Headers": "Authorization"
-            }
-        })
+        const response = await axios.post("https://music.youtube.com/youtubei/v1/player", {videoId: musicId, ...playerParams })
         .then(result => result.data)
         .catch(err => next(err))
 
@@ -41,7 +35,6 @@ module.exports = {
         .find(e=>e.itag === 251)
 
 
-        return res.send({ encodedLink, urlVideo})
         if(urlVideo) {
             return res.status(200).json({ 
                 url: urlVideo
