@@ -58,7 +58,7 @@ module.exports = {
         const decodedUrl = decodeURIComponent(encodedUrl)
         const decodedSignature = signatureEncoded.join("")
 
-        const musicLink = `${decodedUrl}?sig=${decodedSignature}`
+        const musicLink = `${decodedUrl}&sig=${decodedSignature}`
 
         return res.status(200).json({
             nome: response.videoDetails.title,
