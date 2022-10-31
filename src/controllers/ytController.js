@@ -46,13 +46,12 @@ module.exports = {
         const reverseSignature = decodeURIComponent(encodedSignature)
                                  .split("").reverse().join("")
 
-        const hydrateSignature = reverseSignature.slice(0, reverseSignature.length - 3) // USAR FILTER
-
-        const splitHydrateSignature = hydrateSignature.split("")
+        const splitHydrateSignature = reverseSignature.split("")
 
         const signatureEncoded = [...splitHydrateSignature]
-        signatureEncoded[48] = splitHydrateSignature[0]
-        signatureEncoded[0] = splitHydrateSignature[48]
+        signatureEncoded[0] = splitHydrateSignature[34]
+        signatureEncoded[34] = splitHydrateSignature[52]
+        signatureEncoded[52] = splitHydrateSignature[0]
 
         //DECODED
         const decodedUrl = decodeURIComponent(encodedUrl)
